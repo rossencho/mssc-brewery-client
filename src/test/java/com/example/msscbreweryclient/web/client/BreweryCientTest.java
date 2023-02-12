@@ -1,6 +1,7 @@
 package com.example.msscbreweryclient.web.client;
 
 import com.example.msscbreweryclient.web.model.BeerDto;
+import com.example.msscbreweryclient.web.model.CustomerDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,4 +44,35 @@ class BreweryCientTest {
     void deleteBeer() {
         client.deleteBeer(UUID.randomUUID());
     }
+
+    @Test
+    void geCustomerById() {
+        CustomerDto dto = client.getCustomerById(UUID.randomUUID());
+        assertNotNull(dto);
+    }
+
+    @Test
+    void saveNewCustomer() {
+        CustomerDto dto = CustomerDto.builder()
+                .name("Ross")
+                .build();
+        URI uri = client.saveNewCustomer(dto);
+        assertNotNull(uri);
+        System.out.println(uri.toString());
+    }
+
+    @Test
+    void updateCustomer() {
+        CustomerDto dto = CustomerDto.builder()
+                .name("Ross")
+                .build();
+        client.updateCustomer(UUID.randomUUID(), dto);
+    }
+
+    @Test
+    void deleteCustomer() {
+        client.deleteCustomer(UUID.randomUUID());
+    }
+
+
 }
